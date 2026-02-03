@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For My Valentine ❤️</title>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg,#ff758c,#ff7eb3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+        }
+
+        .card {
+            background: rgba(0,0,0,0.35);
+            padding: 40px;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin: 15px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 10px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #yes {
+            background: #00ff88;
+            color: black;
+        }
+
+        #no {
+            background: #ff4444;
+            color: white;
+            position: absolute;
+        }
+
+        .heart {
+            position: absolute;
+            color: pink;
+            animation: float 5s linear infinite;
+            font-size: 20px;
+        }
+
+        @keyframes float {
+            from { transform: translateY(100vh); opacity:1; }
+            to { transform: translateY(-10vh); opacity:0; }
+        }
+
+        #countdown {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 🎵 Background Music (replace with your song link) -->
+<audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b3f54.mp3" type="audio/mp3">
+</audio>
+
+<div class="card">
+    <h1>Hey Apurva ❤️</h1>
+
+    <p>You make every day special...</p>
+
+    <img id="slideshow" src="C:\Users\atulk\OneDrive\Desktop\Love\Photos">
+
+    <p id="countdown"></p>
+
+    <h2>Will you be my Valentine? 💖</h2>
+
+    <button id="yes" onclick="yesClick()">Yes 😍</button>
+    <button id="no" onmouseover="moveNo()">No 😜</button>
+</div>
+
+<script>
+
+    // ❤️ Replace her photos here
+    const images = [
+        "1.jpeg",
+        "2.jpeg",
+        "3.jpeg"
+    ];
+
+    let i = 0;
+    setInterval(() => {
+        i = (i + 1) % images.length;
+        document.getElementById("slideshow").src = images[i];
+    }, 2000);
+
+
+    // 😜 No button runs away
+    function moveNo() {
+        const btn = document.getElementById("no");
+        btn.style.top = Math.random()*80 + "%";
+        btn.style.left = Math.random()*80 + "%";
+    }
+
+
+    // 💖 Yes clicked
+    function yesClick() {
+        alert("Yaaay!! You just made me the happiest person ❤️ I love you!");
+    }
+
+
+    // 🎈 Floating hearts
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.className = "heart";
+        heart.style.left = Math.random()*100 + "vw";
+        heart.style.fontSize = (20 + Math.random()*20) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 5000);
+    }, 300);
+
+
+    // ⏳ Countdown (Valentine's Day)
+    const target = new Date("Feb 14, 2026 00:00:00").getTime();
+
+    setInterval(() => {
+        const now = new Date().getTime();
+        const gap = target - now;
+
+        const d = Math.floor(gap/(1000*60*60*24));
+        const h = Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+        const m = Math.floor((gap%(1000*60*60))/(1000*60));
+
+        document.getElementById("countdown").innerText =
+        "Countdown to our Valentine's Day: " + d+"d "+h+"h "+m+"m";
+    }, 1000);
+
+</script>
+
+</body>
+</html>
